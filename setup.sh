@@ -1,4 +1,5 @@
 #!/bin/sh
+cd $( cd $(dirname $0) && pwd)
 
 printf "lan\tplatform-1c1b000.usb-usb-0:1:1.0\nwan\tplatform-1c30000.ethernet\n" | while read iface path; do
 cat << EOF > /etc/systemd/network/10-$iface.link
