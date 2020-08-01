@@ -10,24 +10,21 @@ Name=$iface
 EOF
 done
 
-cat << EOF >> /etc/NetworkManager/NetworkManager.conf
-
-[keyfile]
-unmanaged-devices=interface-name:wan,interface-name:lan
-
-EOF
-
-
-
 apt update
-DEBIAN_FRONTEND=noninteractive apt install -y dnsmasq lighttpd samba smbclient
+DEBIAN_FRONTEND=noninteractive apt install -y dnsmasq lighttpd samba smbclient php7.3-cgi
 
 adduser --disabled-password --gecos "" victim
 printf "supersekret\nsupersekret\n" | passwd victim
 printf "supersekret\nsupersekret\n"  | smbpasswd -a victim
 
-cp interfaces /etc/config/interfaces
+cp interfaces /etc/network/interfaces
 cp dnsmasq.conf /etc/dnsmasq.conf
-cp NetworkManager.conf /etc/MetworkManager/NetworkManager.conf
+cp NetworkManager.conf /etc/NetworkManager/NetworkManager.conf
+cp index.php /var/www/html/
+cp hosts /etc/hosts
+
+lighty-enable-mod fastcgi 
+lighty-enable-mod fastcgi-php
+service lighttpd force-reload
 
 
