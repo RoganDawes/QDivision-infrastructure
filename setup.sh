@@ -17,6 +17,9 @@ adduser --disabled-password --gecos "" victim
 printf "supersekret\nsupersekret\n" | passwd victim
 printf "supersekret\nsupersekret\n"  | smbpasswd -a victim
 
+mkdir -p /etc/netns/victim/ && echo nameserver 192.168.101.1 > /etc/netns/victim/resolv.conf
+echo 127.0.0.1 localhost > /etc/netns/victim/hosts
+
 cp interfaces /etc/network/interfaces
 cp dnsmasq.conf /etc/dnsmasq.conf
 cp NetworkManager.conf /etc/NetworkManager/NetworkManager.conf

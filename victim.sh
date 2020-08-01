@@ -21,7 +21,7 @@ while ! ip netns exec victim ip a show dev lan | grep -q "inet "; do
 	sleep 5
 done
 while ip netns exec victim ip a show dev lan | grep -q "inet "; do
-    ip netns exec victim curl -d 'username=admin&password=neverguess' --cookie "USER_TOKEN=SomeRandomInfoHere" http://app/
+    ip netns exec victim curl -d 'username=admin&password=neverguess' --cookie "USER_TOKEN=SomeRandomInfoHere" http://app.qdivision/
 
     ip netns exec victim /bin/sh -c "echo ls | smbclient -U victim  //192.168.101.1/victim supersekret"
     sleep 5
