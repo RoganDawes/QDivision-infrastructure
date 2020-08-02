@@ -19,7 +19,7 @@ printf "supersekret\nsupersekret\n" | passwd victim
 printf "supersekret\nsupersekret\n"  | smbpasswd -a victim
 
 mkdir -p /etc/netns/victim/ && echo nameserver 192.168.101.1 > /etc/netns/victim/resolv.conf
-printf "127.0.0.1 localhost\n192.168.101.1 app app.qdivision\n" > /etc/netns/victim/hosts
+printf "127.0.0.1 localhost\n" > /etc/netns/victim/hosts
 
 cp interfaces /etc/network/interfaces
 cp dnsmasq.conf /etc/dnsmasq.conf
@@ -31,4 +31,4 @@ lighty-enable-mod fastcgi
 lighty-enable-mod fastcgi-php
 service lighttpd force-reload
 
-
+printf '#!/bin/sh -e\n/root/QDivision-infrastructure/victim.sh > /dev/null 2| logger & \n\n' > /etc/rc.local

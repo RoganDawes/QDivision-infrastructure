@@ -5,6 +5,7 @@
    }
 ?>
 
+<h1>Your IP address is <?php echo($_SERVER['REMOTE_ADDR']);?></h1> 
 <form action="index.php" method="post">
    <p>Username: <input type="text" name="username" /></p>
    <p>Password: <input type="password" name="password" /></p>
